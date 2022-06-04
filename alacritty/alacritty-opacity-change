@@ -1,0 +1,21 @@
+#!/bin/python
+import sys
+import yaml
+config_path = '~/.config/alacritty/alacritty.yml'
+def main(opacity):
+    while opacity>1: 
+        opacity/=10
+    c = load_config(config_path)
+    prev = c['window']['opacity']
+    with open(config_path, 'w') as f:
+        c['window']['opacity'] = opacity
+        yaml.safe_dump(c, f)
+    print(f"Opacity changed to {opacity} from {prev}")
+
+def load_config(p):
+    with open(p, 'r') as f:
+        y = yaml.safe_load(f)
+        return y
+if __name__ == '__main__':
+    main(float(sys.argv[1]))
+

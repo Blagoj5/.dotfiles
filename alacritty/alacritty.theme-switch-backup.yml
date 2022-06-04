@@ -1,0 +1,85 @@
+alt_send_esc: true
+bell:
+  animation: EaseOutExpo
+  color: '0xffffff'
+  duration: 0
+colors:
+  bright:
+    black: '0x928374'
+    blue: '0x076678'
+    cyan: '0x427b58'
+    green: '0x79740e'
+    magenta: '0x8f3f71'
+    red: '0x9d0006'
+    white: '0x3c3836'
+    yellow: '0xb57614'
+  cursor:
+    cursor: '0x878787'
+    text: '0xeeeeee'
+  dim:
+    black: '0x31363b'
+    blue: '0x1b668f'
+    cyan: '0x186c60'
+    green: '0x17a262'
+    magenta: '0x614a73'
+    red: '0x783228'
+    white: '0x63686d'
+    yellow: '0xb65619'
+  indexed_colors: []
+  normal:
+    black: '0xfbf1c7'
+    blue: '0x458588'
+    cyan: '0x689d6a'
+    green: '0x98971a'
+    magenta: '0xb16286'
+    red: '0xcc241d'
+    white: '0x7c6f64'
+    yellow: '0xd79921'
+  primary:
+    background: '0xfbf1c7'
+    bright_background: '0x000000'
+    bright_foreground: '0xffffff'
+    dim_background: '0x31363b'
+    dim_foreground: '0xeff0f1'
+    foreground: '0x3c3836'
+  search:
+    focused_match:
+      background: CellForeground
+      foreground: CellBackground
+    matches:
+      background: '0xb26818'
+      foreground: '0xb2b2b2'
+  selection:
+    background: '#3e4451'
+    text: CellForeground
+cursor:
+  blink_interval: 250
+  style:
+    blinking: Always
+  unfocused_hollow: true
+draw_bold_text_with_bright_colors: true
+font:
+  bold:
+    family: Fira Code
+    style: SemiBold
+  glyph_offset:
+    x: 0
+    'y': 0
+  italic:
+    family: Fira Code
+    style: Italic
+  normal:
+    family: Fira Code
+    style: SemiLight
+  offset:
+    x: 0
+    'y': 0
+  size: 7
+  use_thin_strokes: true
+live_config_reload: true
+window:
+  decorations: None
+  dynamic_title: false
+  opacity: 0.7
+  startup_mode: Maximized
+  title: codechem home

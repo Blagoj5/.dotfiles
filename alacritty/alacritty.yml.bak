@@ -1,0 +1,85 @@
+alt_send_esc: true
+live_config_reload: true
+background_opacity: .5
+font:
+  normal:
+    family: Cascadia Code PL
+    style: SemiLight
+  bold:
+    family: Cascadia Code PL
+    style: SemiBold
+  italic:
+    family: Cascadia Code PL
+    style: Italic
+  size: 13
+  offset:
+    x: 0
+    'y': 0
+  glyph_offset:
+    x: 0
+    'y': 0
+  use_thin_strokes: true
+draw_bold_text_with_bright_colors: true
+cursor:
+  style:
+    blinking: Always
+  blink_interval: 250
+  unfocused_hollow: true
+bell:
+  animation: EaseOutExpo
+  color: '0xffffff'
+  duration: 0
+window:
+  decorations: buttonless
+  startup_mode: Maximized
+  title: codechem home
+  dynamic_title: false
+colors:
+  primary:
+    background: '0x0A0E14'
+    foreground: '0xB3B1AD'
+    dim_foreground: '0xe3e3e3'
+    bright_foreground: '0xffffff'
+    dim_background: '0x1f1f1f'
+    bright_background: '0x686868'
+  cursor:
+    text: '0xeeeeee'
+    cursor: '0x878787'
+  selection:
+    text: CellForeground
+    background: '#3e4451'
+  normal:
+    black: '0x01060E'
+    red: '0xEA6C73'
+    green: '0x91B362'
+    yellow: '0xF9AF4F'
+    blue: '0x53BDFA'
+    magenta: '0xFAE994'
+    cyan: '0x90E1C6'
+    white: '0xC7C7C7'
+  indexed_colors: []
+  bright:
+    black: '0x686868'
+    red: '0xF07178'
+    green: '0xC2D94C'
+    yellow: '0xFFB454'
+    blue: '0x59C2FF'
+    magenta: '0xFFEE99'
+    cyan: '0x95E6CB'
+    white: '0xFFFFFF'
+  dim:
+    black: '0x000000'
+    red: '0xb21818'
+    green: '0x18b218'
+    yellow: '0xb26818'
+    blue: '0x1818b2'
+    magenta: '0xb218b2'
+    cyan: '0x18b2b2'
+    white: '0xb2b2b2'
+  search:
+    matches:
+      foreground: '0xb2b2b2'
+      background: '0xb26818'
+    focused_match:
+      foreground: CellBackground
+      background: CellForeground
