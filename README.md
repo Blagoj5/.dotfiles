@@ -3,10 +3,10 @@
 How it should like on your LINUX:
 ```
 ~(root)
-?   .tmux.conf
-????.config
-?   ?   nvim
-?   ?   alacritty
+│   .tmux.conf
+└───.config
+│   │   nvim
+│   │   alacritty
 ```
 
 ### NVIM
