@@ -4,6 +4,8 @@ How it should like on your LINUX:
 ```
 ~(root)
 │   .tmux.conf
+│   .zshrc
+│   .zsh_profile
 └───.config
 │   │   nvim
 │   │   │   *.lua
