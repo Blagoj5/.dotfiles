@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+ctl=`command -v brightnessctl `
+if [ -z "$ctl" ]; then
+  sudo apt-get update
+  sudo apt-get install brightnessctl 
+fi
+
+increase=$1
+
+currentBright=`brightnessctl i | grep -o "(.*%)$" | grep -Po "\\d+"`
+newBright=$(( $increase + $currentBright ))
+brightnessctl s "$newBright%"
