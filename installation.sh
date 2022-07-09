@@ -38,3 +38,21 @@ if [ -z "$nvim" ]; then
   sudo apt install ./nvim-linux64.deb
   rm ./nvim-linux64.deb
 fi
+
+nvim=`command -v nvim`
+if [ -z "$nvim" ]; then
+  curl -o ./nvim-linux64.deb -JLO https://github.com/neovim/neovim/releases/download/v0.7.0/nvim-linux64.deb
+  sudo apt install ./nvim-linux64.deb
+  rm ./nvim-linux64.deb
+fi
+
+fzf=`command -v nvim`
+if [ -z "$fzf" ]; then
+  echo "Installing fzf"
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
+  source ~/.zshrc
+fi
+
+echo COMPLETE
+

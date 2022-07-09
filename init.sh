@@ -19,11 +19,25 @@ if [ -f ~/.zshrc ]; then
   read
   if [ "$REPLY" = "n" ]; then
     echo "Existing installation"
-  elif [ "$REPLY" = "y" ]
+    exit 1
+  elif [ "$REPLY" = "y" ]; then
     rm ~/.zshrc
   fi
 fi
 cp ./.zshrc ~/.zshrc
+
+echo "Moving nvim to root"
+if [ -d ~/.config/nvim ]; then 
+  echo -n "~/.config/nvim already exists, overwrite? (y/n)"
+  read
+  if [ "$REPLY" = "n" ]; then
+    echo "Existing installation"
+    exit 1
+  elif [ "$REPLY" = "y" ]; then
+    rm -r ~/.config/nvim
+    mkdir ~/.config/nvim
+fi
+cp -r ./.config/nvim/* ~/.config/nvim/
 
 if [ -f ~/.zsh_profile ]; then 
   echo "Moving old .zsh_profile to .zsh_profile.backup"
@@ -62,8 +76,3 @@ if [ ! -d ~/.local/share/fonts ]; then
   mkdir -p ~/.local/share/fonts
 fi
 cp -r ./.local/share/fonts/* ~/.local/share/fonts/
-
-echo "Installing fzf"
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
-source ~/.zshrc
