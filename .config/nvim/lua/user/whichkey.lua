@@ -104,6 +104,15 @@ local mappings = {
     S = { "<cmd>PackerStatus<cr>", "Status" },
     u = { "<cmd>PackerUpdate<cr>", "Update" },
   },
+  C = {
+    name = "Configurations",
+    n = {"<cmd>:e ~/.config/nvim/init.lua <CR>", "Neovim"},
+    i = {"<cmd>:e ~/.config/i3/config <CR>", "I3WM"},
+    s = {"<cmd>:e ~/.config/i3status/config <CR>", "I3WM Status Bar"},
+    a = {"<cmd>:e ~/.config/alacritty/alacritty.yml <CR>", "Alacritty"},
+    t = {"<cmd>:e ~/.tmux.conf <CR>", "Tmux"},
+    r = {"<cmd>:luafile % <CR>", "Restart current lua"},
+  },
 
   g = {
     name = "Git",
