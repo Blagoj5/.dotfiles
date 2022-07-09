@@ -25,6 +25,9 @@ export DENO_INSTALL="$HOME/.deno"
 export N_PREFIX="$HOME/.local/n"
 export DOTFILES=$HOME/.dotfiles
 export BOGART=$HOME/work/bogart
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 addToPathFront $HOME/.local/.npm-global/bin
 addToPathFront $HOME/.local/n/bin/
@@ -83,3 +86,6 @@ eslintify() {
     cat $1 > /tmp/file_to_eslint
     npx eslint
 }
+
+xmodmap -e "clear lock" #disable caps lock switch
+xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
