@@ -23,31 +23,31 @@ for _, server in pairs(servers) do
 	lspconfig[server].setup(opts)
 end
 
-lspconfig.eslint.setup({
-  codeAction = {
-    disableRuleComment = {
-      enable = true,
-      location = "separateLine"
-    },
-    showDocumentation = {
-      enable = true
-    }
-  },
-  codeActionOnSave = {
-    enable = true,
-    mode = "all"
-  },
-  format = true,
-  nodePath = "",
-  onIgnoredFiles = "off",
-  packageManager = "npm",
-  quiet = false,
-  rulesCustomizations = {},
-  run = "onType",
-  useESLintClass = false,
-  validate = "on",
-  workingDirectory = {
-    mode = "auto"
-  }
-})
+-- lspconfig.eslint.setup({
+--   codeAction = {
+--     disableRuleComment = {
+--       enable = true,
+--       location = "separateLine"
+--     },
+--     showDocumentation = {
+--       enable = true
+--     }
+--   },
+--   codeActionOnSave = {
+--     enable = true,
+--     mode = "all"
+--   },
+--   format = true,
+--   nodePath = "",
+--   onIgnoredFiles = "off",
+--   packageManager = "npm",
+--   quiet = false,
+--   rulesCustomizations = {},
+--   run = "onType",
+--   useESLintClass = false,
+--   validate = "on",
+--   workingDirectory = {
+--     mode = "location"
+--   }
+-- })
 

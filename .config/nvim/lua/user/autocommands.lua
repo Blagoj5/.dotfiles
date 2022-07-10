@@ -8,9 +8,9 @@ vim.cmd [[
     autocmd FileType qf set nobuflisted
   augroup end
 
-  augroup _eslint
-    autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
-  augroup end
+  " augroup _eslint
+  "   autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
+  " augroup end
 
   augroup _git
     autocmd!
