@@ -2,6 +2,9 @@
 
 ## Required
 - Neovim v0.8
+- I3WM
+  - picom (composer)
+  - nitrogen (background)
 
 ## Structure
 

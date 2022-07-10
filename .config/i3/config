@@ -237,3 +237,13 @@ bindsym Control+Shift+4 exec flameshot gui
 # Suspend
 bindsym $mod+Shift+period exec systemctl suspend
 
+# background
+exec --no-startup-id nitrogen --restore; sleep 1; picom -b
+# exec_always --no-startup-id picom -f # adds animation
+
+# Add Macedonian Keyboard Layout
+# exec_always --no-startup-id "setxkbmap -option caps:escape"
+exec_always --no-startup-id "setxkbmap -layout us,mk -option 'grp:lctrl_lwin_toggle'"
+
+# Bind Caps_lock to escape, disable caps lock switch, set caps_lock as escape
+exec_always --no-startup-id xmodmap -e "clear lock"; sleep 1; xmodmap -e "keysym Caps_Lock = Escape" 
