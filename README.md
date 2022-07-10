@@ -1,5 +1,10 @@
 # .dotfiles
 
+## Required
+- Neovim v0.8
+
+## Structure
+
 How it should like on your LINUX:
 ```
 ~(root)
