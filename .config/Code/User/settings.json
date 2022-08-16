@@ -1,0 +1,248 @@
+{
+    "workbench.colorTheme": "Default Dark+",
+    "vim.leader": " ",
+    "vim.hlsearch": true,
+    "vim.highlightedyank.enable": true,
+    "vim.overrideCopy": true,
+    "vim.visualstar": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "f",
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.quickOpen",
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "F",
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.findInFiles",
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "e",
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.toggleSidebarVisibility",
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "c",
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.closeActiveEditor",
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "l",
+            ],
+            "commands": [
+                {
+                    "command": "gitlens.toggleFileBlame",
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "l",
+                "j",
+            ],
+            "commands": [
+                {
+                    "command": "editor.action.marker.next",
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "l",
+                "k",
+            ],
+            "commands": [
+                {
+                    "command": "editor.action.marker.prev",
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "j",
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.editor.nextChange",
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "k",
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.editor.previousChange",
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "d",
+            ],
+            "commands": [
+                {
+                    "command": "git.openChange"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "l",
+                "q",
+            ],
+            "commands": [
+                {
+                    "command": "workbench.actions.view.problems"
+                }
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "t",
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.terminal.toggleTerminal"
+                },
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "l",
+                "f",
+            ],
+            "commands": [
+                {
+                    "command": "eslint.executeAutofix"
+                },
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "w",
+            ],
+            "commands": [
+                {
+                    "command": "workbench.action.files.save"
+                },
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "m",
+            ],
+            "commands": [
+                {
+                    "command": "git.merge"
+                },
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "c",
+            ],
+            "commands": [
+                {
+                    "command": "git.branchFrom"
+                },
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "s",
+            ],
+            "commands": [
+                {
+                    "command": "git.checkout"
+                },
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "r",
+            ],
+            "commands": [
+                {
+                    "command": "editor.action.goToReferences"
+                },
+            ]
+        }
+    ],
+    "vim.insertModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "j",
+                "k"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        },
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "g",
+                "r",
+            ],
+            "commands": [
+                {
+                    "command": "git.revertSelectedRanges",
+                }
+            ]
+        },
+    ],
+    "terminal.integrated.defaultProfile.linux": "tmux",
+    "keyboard.dispatch": "keyCode",
+    "git.confirmSync": false,
+    "editor.lineNumbers": "relative"
+}
