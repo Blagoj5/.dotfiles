@@ -3,8 +3,11 @@
     "vim.leader": " ",
     "vim.hlsearch": true,
     "vim.highlightedyank.enable": true,
-    "vim.overrideCopy": true,
     "vim.visualstar": true,
+    "vim.overrideCopy": false,
+    "vim.useSystemClipboard": true,
+    "vim.foldfix": true,
+    "editor.experimental.useCustomCodeActionMenu": true,
     "vim.normalModeKeyBindingsNonRecursive": [
         {
             "before": [
