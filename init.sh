@@ -13,6 +13,12 @@ then
 fi
 cp -r ./.config/personal/* ~/.config/personal/
 
+echo "Moving fonts to ~/.local/share/fonts"
+if [ ! -d ~/.local/share/fonts ]; then 
+  mkdir -p ~/.local/share/fonts
+fi
+cp -r ./.local/share/fonts/* ~/.local/share/fonts/
+
 echo "Moving zsh to root"
 if [ -f ~/.zshrc ]; then 
   echo -n "~/.zshrc already exists, overwrite? (y/n)"
@@ -26,6 +32,12 @@ if [ -f ~/.zshrc ]; then
 fi
 cp ./.zshrc ~/.zshrc
 
+if [ -f ~/.zsh_profile ]; then 
+  echo "Moving old .zsh_profile to .zsh_profile.backup"
+  mv ~/.zsh_profile ~/.zsh_profile.backup
+fi
+cp ./.zsh_profile ~/.zsh_profile 
+
 echo "Moving nvim to root"
 if [ -d ~/.config/nvim ]; then 
   echo -n "~/.config/nvim already exists, overwrite? (y/n)"
@@ -38,12 +50,6 @@ if [ -d ~/.config/nvim ]; then
     mkdir ~/.config/nvim
 fi
 cp -r ./.config/nvim/* ~/.config/nvim/
-
-if [ -f ~/.zsh_profile ]; then 
-  echo "Moving old .zsh_profile to .zsh_profile.backup"
-  mv ~/.zsh_profile ~/.zsh_profile.backup
-fi
-cp ./.zsh_profile ~/.zsh_profile 
 
 echo "Moving tmux conf to root (~)"
 if [ -f ~/.tmux.conf ]; then 
@@ -70,9 +76,3 @@ if [ -d ~/.config/alacritty ]; then
   mv ~/.config/alacritty ~/.config/alacritty.backup
 fi
 cp -r ./.config/alacritty/* ~/.config/alacritty
-
-echo "Moving fonts to ~/.local/share/fonts"
-if [ ! -d ~/.local/share/fonts ]; then 
-  mkdir -p ~/.local/share/fonts
-fi
-cp -r ./.local/share/fonts/* ~/.local/share/fonts/
