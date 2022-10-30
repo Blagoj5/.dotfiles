@@ -235,6 +235,9 @@ bindsym $mod+semicolon exec ~/.config/i3/scripts/alsa down Headphone
 bindsym $mod+comma exec ~/.config/i3/scripts/alsa up Headphone
 bindsym $mod+m move workspace to output left
 
+# Bluetooth
+bindsym $mod+b exec --no-startup-id blueman-manager
+
 # Take screenshot, must install flameshot
 bindsym Control+Shift+4 exec flameshot gui
 
