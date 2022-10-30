@@ -5,6 +5,8 @@
 - I3WM
   - picom (composer)
   - nitrogen (background)
+  
+Good read: https://www.makeuseof.com/things-to-do-after-installing-i3wm/
 
 ## Structure
 
