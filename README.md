@@ -5,7 +5,8 @@
 - I3WM
   - picom (composer)
   - nitrogen (background)
-  - blueman (bluetooth manager)
+  - blueman (GUI bluetooth manager)
+  - pavucontrol (GUI for audio), also available shortcuts for handling sound (pactl) 
   
 Good read: https://www.makeuseof.com/things-to-do-after-installing-i3wm/
 
