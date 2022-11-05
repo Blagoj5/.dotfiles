@@ -24,7 +24,7 @@ if [ -f ~/.tmux.conf ]; then
 fi
 cp ./.tmux.conf ~/.tmux.conf
 
-fzf=`command -v nvim`
+fzf=`command -v fzf`
 if [ -z "$fzf" ]; then
   echo "Installing fzf"
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf

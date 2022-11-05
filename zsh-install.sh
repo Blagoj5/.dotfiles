@@ -7,8 +7,6 @@ fi
 
 echo "Moving zsh to root"
 if [ -f ~/.zshrc ]; then 
-  echo -n "~/.zshrc already exists, overwrite? (y/n)"
-  read
   if [ "$REPLY" = "n" ]; then
     echo "Existing installation"
     exit 1

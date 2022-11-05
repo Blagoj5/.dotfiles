@@ -30,6 +30,8 @@ How it should like on your LINUX:
 │   │   personal
 │   │   │   env
 │   │   │   path
+│   │   qutebrowser
+│   │   │   config.py
 └───.local
 │   │   share
 │   │   │   fonts
