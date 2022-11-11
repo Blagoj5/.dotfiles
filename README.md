@@ -9,6 +9,7 @@
   - pavucontrol (GUI for audio), also available shortcuts for handling sound (pactl) 
   
 Good read: https://www.makeuseof.com/things-to-do-after-installing-i3wm/
+Setup laptop: https://cravencode.com/post/essentials/enable-tap-to-click-in-i3wm/
 
 ## Structure
 
