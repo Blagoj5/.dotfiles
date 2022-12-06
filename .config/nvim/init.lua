@@ -54,8 +54,13 @@ require('baze.telescope')
 require('baze.treesitter')
 require('baze.gitsigns')
 require('baze.nvimtree')
+
+require('baze.lsp.cmp')
+require('baze.lsp.mason')
+require('baze.lsp.saga')
 require('baze.lsp.lsp-config')
 require('baze.lsp.null-ls')
+
 require('baze.lualine')
 require("baze.comment")
 require("baze.autopairs")

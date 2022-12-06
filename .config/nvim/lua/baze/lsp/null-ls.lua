@@ -1,4 +1,8 @@
-local null_ls = require("null-ls")
+-- import null-ls plugin safely
+local setup, null_ls = pcall(require, "null-ls")
+if not setup then
+  return
+end
 
 local lsp_code_action = function()
     vim.lsp.buf.code_action()
@@ -10,7 +14,8 @@ local lsp_formatting = function(bufnr)
             filter = function(client)
                 return client.name == "null-ls"
             end,
-            bufnr = bufnr
+            bufnr = bufnr,
+            timeout_ms = 30000,
         })
     end
 end
@@ -22,9 +27,16 @@ local formatting = null_ls.builtins.formatting
 local sources = {
     -- diagnostics.cspell,
     -- code_actions.cspell,
-    diagnostics.eslint_d.with({ diagnostics_format = '[eslint] #{m}\n(#{c})' }),
     code_actions.eslint_d,
-    formatting.eslint_d
+    formatting.eslint_d,
+    -- formatting.prettier, -- js/ts formatter
+    formatting.stylua, -- lua formatter
+    diagnostics.eslint_d.with({ -- js/ts linter
+      -- only enable eslint if root has .eslintrc.js (not in youtube nvim video)
+      condition = function(utils)
+        return utils.root_has_file(".eslintrc.js") or utils.root_has_file(".eslintrc") -- change file extension if you use something else
+      end,
+    }),
 }
 
 null_ls.setup {
@@ -42,9 +54,5 @@ null_ls.setup {
         if client.supports_method("textDocument/codeAction") then
             vim.keymap.set('n', '<space>la', lsp_code_action, bufopts)
         end
-
-        -- TODO: support
-        -- if client.supports_method("textDocument/hover") then
-        -- end
     end
 }

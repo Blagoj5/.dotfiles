@@ -28,7 +28,7 @@ if [ -z "$clang" ]; then
 fi
 
 echo "Installing LSP servers"
-npm install -g typescript typescript-language-server eslint_d cspell
+npm install -g typescript typescript-language-server eslint_d cspell tree-sitter-cli
 
 
 # TODO: adress this
