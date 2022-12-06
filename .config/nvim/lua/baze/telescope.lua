@@ -3,8 +3,6 @@ local actions = require "telescope.actions"
 
 telescope.setup {
  defaults = {
-    prompt_prefix = " ",
-    selection_caret = " ",
     path_display = { "truncate" },
 
     mappings = {
@@ -64,10 +62,6 @@ telescope.setup {
 
         ["<C-u>"] = actions.preview_scrolling_up,
         ["<C-d>"] = actions.preview_scrolling_down,
-
-        ["<PageUp>"] = actions.results_scrolling_up,
-        ["<PageDown>"] = actions.results_scrolling_down,
-
       },
     },
   },
@@ -88,8 +82,8 @@ telescope.load_extension('fzf')
 local builtin = require('telescope.builtin')
 local themes = require('telescope.themes')
 
-vim.keymap.set('n', '<leader>f', function () return builtin.find_files(themes.get_dropdown{previewer = false, hidden = true}) end, {})
+vim.keymap.set('n', '<leader>ff', function () return builtin.find_files(themes.get_dropdown{previewer = false, hidden = true}) end, {})
 vim.keymap.set('n', '<leader>F', function () return builtin.live_grep(themes.get_ivy()) end, {})
-vim.keymap.set('n', '<leader>bf', function () return builtin.buffers(themes.get_dropdown{previewer = false}) end, {})
+vim.keymap.set('n', '<leader>fb', function () return builtin.buffers(themes.get_dropdown{previewer = false}) end, {})
 -- vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>go', builtin.git_status, {})
