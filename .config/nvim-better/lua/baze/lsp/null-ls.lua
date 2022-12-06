@@ -20,8 +20,8 @@ local code_actions = null_ls.builtins.code_actions
 local formatting = null_ls.builtins.formatting
 -- local hover = null_ls.builtins.hover
 local sources = {
-    null_ls.builtins.diagnostics.cspell,
-    null_ls.builtins.code_actions.cspell,
+    -- diagnostics.cspell,
+    -- code_actions.cspell,
     diagnostics.eslint_d.with({ diagnostics_format = '[eslint] #{m}\n(#{c})' }),
     code_actions.eslint_d,
     formatting.eslint_d

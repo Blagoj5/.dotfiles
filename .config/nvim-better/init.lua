@@ -19,6 +19,8 @@ vim.g.mapleader = ' '
 vim.keymap.set('n', '<leader>w', '<cmd>write<cr>')
 vim.keymap.set('n', '<leader>c', '<cmd>bw<cr>')
 vim.keymap.set('n', '<leader>C', '<cmd>e ~/.config/nvim/init.lua<cr>')
+vim.keymap.set('v', "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', "K", ":m '<-2<CR>gv=gv")
 
 -- Auto commands
 local augroup = vim.api.nvim_create_augroup('user_cmds', { clear = true })

@@ -3,8 +3,8 @@ local opts = {
     silent = true
 }
 
-vim.keymap.set('n', '<space>lj', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', '<space>lk', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<space>lk', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', '<space>lj', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>lq', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
@@ -59,7 +59,25 @@ lspconfig['tsserver'].setup {
     capabilities = capabilities
 }
 
+lspconfig['tailwindcss'].setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities
+}
+
 lspconfig['sumneko_lua'].setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities
+}
+
+lspconfig['gopls'].setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities
+}
+
+lspconfig['golangci_lint_ls'].setup {
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities
