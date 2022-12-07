@@ -11,30 +11,35 @@ vim.g.loaded_netrwPlugin = 1
 -- change color for arrows in tree to light blue
 -- vim.cmd([[ highlight NvimTreeIndentMarker guifg=#3FC5FF ]])
 
-nvim_tree.setup {
+nvim_tree.setup({
 	actions = {
 		open_file = {
 			quit_on_open = true,
-      window_picker = {
-        enable = false
-      }
+			window_picker = {
+				enable = false,
+			},
 		},
-    -- change_dir = {
-    --   enable = false,
-    --   global = false,
-    --   restrict_above_cwd = true,
-    -- }
+		-- change_dir = {
+		--   enable = false,
+		--   global = false,
+		--   restrict_above_cwd = true,
+		-- }
 	},
-  renderer = {
-    icons = {
-      glyphs = {
-        folder = {
-          arrow_closed = "", -- arrow when folder is closed
-          arrow_open = "", -- arrow when folder is open
-        },
-      },
-    },
-  },
-}
+	update_focused_file = {
+		enable = true,
+		update_root = false,
+		ignore_list = {},
+	},
+	renderer = {
+		icons = {
+			glyphs = {
+				folder = {
+					arrow_closed = "", -- arrow when folder is closed
+					arrow_open = "", -- arrow when folder is open
+				},
+			},
+		},
+	},
+})
 
-vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', {})
+vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", {})
