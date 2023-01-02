@@ -14,14 +14,6 @@ return require("packer").startup(function(use)
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 
-	use({
-		"rose-pine/neovim",
-		as = "rose-pine",
-		config = function()
-			vim.cmd("colorscheme rose-pine")
-		end,
-	})
-
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 	use("nvim-treesitter/nvim-treesitter-context")
 
@@ -56,6 +48,14 @@ return require("packer").startup(function(use)
 		},
 	})
 
+	use({
+		"nvim-tree/nvim-tree.lua",
+		requires = {
+			"nvim-tree/nvim-web-devicons", -- optional, for file icons
+		},
+		tag = "nightly", -- optional, updated every week. (see issue #1193)
+	})
+
 	use("folke/zen-mode.nvim")
 	use("github/copilot.vim")
 
@@ -75,6 +75,14 @@ return require("packer").startup(function(use)
 		-- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
 	})
 
-	use("mfussenegger/nvim-dap")
-	use("David-Kunz/jester")
+	use({
+		"rose-pine/neovim",
+		as = "rose-pine",
+		config = function()
+			vim.cmd("colorscheme rose-pine")
+		end,
+	})
+	use("EdenEast/nightfox.nvim")
+	use("navarasu/onedark.nvim")
+	use("marko-cerovac/material.nvim")
 end)
