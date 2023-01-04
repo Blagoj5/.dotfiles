@@ -19,11 +19,11 @@ nvim_tree.setup({
 				enable = false,
 			},
 		},
-		-- change_dir = {
-		--   enable = false,
-		--   global = false,
-		--   restrict_above_cwd = true,
-		-- }
+		change_dir = {
+		  enable = false,
+		  global = false,
+		  restrict_above_cwd = true,
+		}
 	},
 	update_focused_file = {
 		enable = true,

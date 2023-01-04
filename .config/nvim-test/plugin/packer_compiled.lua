@@ -130,6 +130,11 @@ _G.packer_plugins = {
     path = "/home/blagojpetrov/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/theprimeagen/harpoon"
   },
+  jester = {
+    loaded = true,
+    path = "/home/blagojpetrov/.local/share/nvim/site/pack/packer/start/jester",
+    url = "https://github.com/David-Kunz/jester"
+  },
   ["lsp-zero.nvim"] = {
     loaded = true,
     path = "/home/blagojpetrov/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
@@ -150,6 +155,16 @@ _G.packer_plugins = {
     path = "/home/blagojpetrov/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["material.nvim"] = {
+    loaded = true,
+    path = "/home/blagojpetrov/.local/share/nvim/site/pack/packer/start/material.nvim",
+    url = "https://github.com/marko-cerovac/material.nvim"
+  },
+  ["nightfox.nvim"] = {
+    loaded = true,
+    path = "/home/blagojpetrov/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
+    url = "https://github.com/EdenEast/nightfox.nvim"
+  },
   ["null-ls.nvim"] = {
     loaded = true,
     path = "/home/blagojpetrov/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
@@ -165,6 +180,11 @@ _G.packer_plugins = {
     path = "/home/blagojpetrov/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "/home/blagojpetrov/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/blagojpetrov/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -175,6 +195,11 @@ _G.packer_plugins = {
     path = "/home/blagojpetrov/.local/share/nvim/site/pack/packer/start/nvim-surround",
     url = "https://github.com/kylechui/nvim-surround"
   },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/home/blagojpetrov/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    url = "https://github.com/nvim-tree/nvim-tree.lua"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/home/blagojpetrov/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
@@ -184,6 +209,23 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/blagojpetrov/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
     url = "https://github.com/nvim-treesitter/nvim-treesitter-context"
+  },
+  ["nvim-treesitter-textobjects"] = {
+    load_after = {},
+    loaded = true,
+    needs_bufread = false,
+    path = "/home/blagojpetrov/.local/share/nvim/site/pack/packer/opt/nvim-treesitter-textobjects",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
+  },
+  ["nvim-web-devicons"] = {
+    loaded = true,
+    path = "/home/blagojpetrov/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+    url = "https://github.com/nvim-tree/nvim-web-devicons"
+  },
+  ["onedark.nvim"] = {
+    loaded = true,
+    path = "/home/blagojpetrov/.local/share/nvim/site/pack/packer/start/onedark.nvim",
+    url = "https://github.com/navarasu/onedark.nvim"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -237,6 +279,11 @@ time([[Config for Comment.nvim]], false)
 time([[Config for rose-pine]], true)
 try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\0056\0\0\0009\0\1\0'\2\2\0B\0\2\1K\0\1\0\26colorscheme rose-pine\bcmd\bvim\0", "config", "rose-pine")
 time([[Config for rose-pine]], false)
+-- Load plugins in order defined by `after`
+time([[Sequenced loading]], true)
+vim.cmd [[ packadd nvim-treesitter ]]
+vim.cmd [[ packadd nvim-treesitter-textobjects ]]
+time([[Sequenced loading]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

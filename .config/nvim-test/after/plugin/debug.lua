@@ -50,7 +50,7 @@ dap.adapters.node2 = {
 
 local jester = require("jester")
 jester.setup({
-	cmd = "node_modules/.bin/jest --runInBand --testNamePattern '$result' --testPathPattern $file", -- run command
+	cmd = "./node_modules/.bin/jest --runInBand --testNamePattern '$result' --testPathPattern $file", -- run command
 	identifiers = { "test", "it" }, -- used to identify tests
 	prepend = { "describe" }, -- prepend describe blocks
 	expressions = { "call_expression" }, -- tree-sitter object used to scan for tests/describe blocks

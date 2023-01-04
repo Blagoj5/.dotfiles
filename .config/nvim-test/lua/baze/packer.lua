@@ -16,11 +16,21 @@ return require("packer").startup(function(use)
 
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 	use("nvim-treesitter/nvim-treesitter-context")
+	use({ -- Additional text objects via treesitter
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		after = "nvim-treesitter",
+	})
 
 	-- use('nvim-treesitter/playground')
 	use("theprimeagen/harpoon")
 	use("mbbill/undotree")
+
+	-- git stuff
 	use("tpope/vim-fugitive")
+	use({
+		"lewis6991/gitsigns.nvim",
+		-- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
+	})
 
 	use({
 		"VonHeikemen/lsp-zero.nvim",
@@ -70,10 +80,9 @@ return require("packer").startup(function(use)
 
 	use("kylechui/nvim-surround")
 
-	use({
-		"lewis6991/gitsigns.nvim",
-		-- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
-	})
+	-- debug/tests plugins
+	use("David-Kunz/jester")
+	use("mfussenegger/nvim-dap")
 
 	use({
 		"rose-pine/neovim",
