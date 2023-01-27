@@ -5,6 +5,8 @@ if not snip_status_ok then
 end
 require("luasnip/loaders/from_vscode").lazy_load()
 
+require("neodev").setup({})
+
 lsp.preset("recommended")
 
 lsp.ensure_installed({
@@ -14,6 +16,24 @@ lsp.ensure_installed({
 	"tailwindcss",
 	"sumneko_lua",
 	"emmet_ls",
+	"sqls",
+})
+
+lsp.configure("sqls", {
+	settings = {
+		sqls = {
+			connections = {
+				{
+					driver = "mysql",
+					dataSourceName = "root:admin@tcp(127.0.0.1:3306)/cfdb_79fee615_c1fb_11eb_9414_0ad79635d98a",
+				},
+				-- {
+				-- 	driver = "postgresql",
+				-- 	dataSourceName = "host=127.0.0.1 port=15432 user=postgres password=mysecretpassword1234 dbname=dvdrental sslmode=disable",
+				-- },
+			},
+		},
+	},
 })
 
 local check_backspace = function()
@@ -103,19 +123,19 @@ lsp.on_attach(function(_client, bufnr)
 	vim.keymap.set("n", "<leader>ld", function()
 		vim.diagnostic.open_float()
 	end, opts)
-	vim.keymap.set("n", "<leader>lk", function()
+	vim.keymap.set("n", "[d", function()
 		vim.diagnostic.goto_prev()
 	end, opts)
-	vim.keymap.set("n", "<leader>lj", function()
+	vim.keymap.set("n", "]d", function()
 		vim.diagnostic.goto_next()
 	end, opts)
-	vim.keymap.set("n", "<leader>la", function()
+	vim.keymap.set("n", "<leader>ca", function()
 		vim.lsp.buf.code_action()
 	end, opts)
 	vim.keymap.set("n", "gr", function()
 		vim.lsp.buf.references()
 	end, opts)
-	vim.keymap.set("n", "<leader>lr", function()
+	vim.keymap.set("n", "<leader>rn", function()
 		vim.lsp.buf.rename()
 	end, opts)
 	vim.keymap.set("i", "<C-h>", function()

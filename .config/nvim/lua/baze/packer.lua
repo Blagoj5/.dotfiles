@@ -7,12 +7,10 @@ return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 
-	use({
-		"nvim-telescope/telescope.nvim",
-		tag = "0.1.0",
-		-- or                            , branch = '0.1.x',
-		requires = { { "nvim-lua/plenary.nvim" } },
-	})
+	-- Fuzzy Finder (files, lsp, etc)
+	use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", requires = { "nvim-lua/plenary.nvim" } })
+	-- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
+	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
 
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 	use("nvim-treesitter/nvim-treesitter-context")
@@ -67,7 +65,7 @@ return require("packer").startup(function(use)
 	})
 
 	use("folke/zen-mode.nvim")
-	use("github/copilot.vim")
+	-- use("github/copilot.vim")
 
 	use({
 		"numToStr/Comment.nvim",
@@ -75,14 +73,44 @@ return require("packer").startup(function(use)
 			require("Comment").setup()
 		end,
 	})
+	use("lukas-reineke/indent-blankline.nvim") -- Add indentation guides even on blank lines
+	use("tpope/vim-sleuth") -- Detect tabstop and shiftwidth automatically
+
+	use("folke/neodev.nvim")
+
+	-- status line
+	use({
+		"nvim-lualine/lualine.nvim",
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+	})
 
 	use("windwp/nvim-autopairs")
+	use("windwp/nvim-ts-autotag")
 
 	use("kylechui/nvim-surround")
 
 	-- debug/tests plugins
-	use("David-Kunz/jester")
+	-- use("David-Kunz/jester")
 	use("mfussenegger/nvim-dap")
+	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+	use("theHamsta/nvim-dap-virtual-text")
+	use("nvim-telescope/telescope-dap.nvim")
+	use("vim-test/vim-test")
+	use({
+		"andrewferrier/debugprint.nvim",
+		config = function()
+			require("debugprint").setup()
+		end,
+	})
+
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = "cd app && npm install",
+		setup = function()
+			vim.g.mkdp_filetypes = { "markdown" }
+		end,
+		ft = { "markdown" },
+	})
 
 	use({
 		"rose-pine/neovim",
