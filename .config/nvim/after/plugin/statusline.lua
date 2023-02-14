@@ -28,7 +28,7 @@ require("lualine").setup({
 		lualine_y = {},
 		lualine_z = {},
 	},
-	iactive_winbar = {
+	inactive_winbar = {
 		lualine_a = {},
 		lualine_b = { "%f %m" },
 		lualine_c = {},
