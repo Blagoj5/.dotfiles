@@ -30,7 +30,6 @@ fi
 echo "Installing LSP servers"
 npm install -g typescript typescript-language-server eslint_d cspell tree-sitter-cli
 
-
 # TODO: adress this
 luaServer=`command -v lua-language-server`
 if [ -z "$luaServer" ]; then 
@@ -61,20 +60,17 @@ if [ -d "$HOME/.config/nvim" ]; then
   read CONFIRM
   if [ "$CONFIRM" = "y" ]; then
     echo "Moved new nvim config"
-    rm -r ~/.config/nvim
-    mkdir ~/.config/nvim
-    cp -r ./.config/nvim/* ~/.config/nvim/
+     ln -sf $PWD/.config/nvim ~/.config/nvim
     exit 1
   elif [ "$CONFIRM" = "n" ]; then
     echo "Exiting installation"
   fi
 else 
-  mkdir -p ~/.config/nvim
-  cp -r ./.config/nvim/* ~/.config/nvim/
+  ln -sf $PWD/.config/nvim ~/.config/nvim
 fi
 
-echo "Moving fonts to ~/.local/share/fonts"
-if [ ! -d ~/.local/share/fonts ]; then 
-  mkdir -p ~/.local/share/fonts
-fi
-cp -r ./.local/share/fonts/* ~/.local/share/fonts/
+# echo "Moving fonts to ~/.local/share/fonts"
+# if [ ! -d ~/.local/share/fonts ]; then 
+#   mkdir -p ~/.local/share/fonts
+# fi
+# cp -r ./.local/share/fonts/* ~/.local/share/fonts/

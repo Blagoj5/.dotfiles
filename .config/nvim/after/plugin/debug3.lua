@@ -20,6 +20,27 @@ dap.adapters.node2 = {
 	args = { os.getenv("HOME") .. "/dev/microsoft/vscode-node-debug2/out/src/nodeDebug.js" },
 }
 
+dap.configurations.javascript = {
+  {
+    name = 'Launch',
+    type = 'node2',
+    request = 'launch',
+    program = '${file}',
+    cwd = vim.fn.getcwd(),
+    sourceMaps = true,
+    protocol = 'inspector',
+    console = 'integratedTerminal',
+  },
+	-- Activated via <leader>da (using attach function from debugHelpers)
+  -- {
+  --   -- For this to work you need to make sure the node process is started with the `--inspect` flag.
+  --   name = 'Attach to process',
+  --   type = 'node2',
+  --   request = 'attach',
+  --   processId = require'dap.utils'.pick_process,
+  -- },
+}
+
 -- UI FOR DAP
 local dapui = require("dapui")
 dapui.setup({
@@ -112,6 +133,7 @@ dap.listeners.before.event_exited["dapui_config"] = function()
 	dapui.close()
 end
 
+
 require("nvim-dap-virtual-text").setup()
 
 vim.keymap.set("n", "<leader>tn", "<cmd>TestNearest -strategy=neovim<CR>")
@@ -135,3 +157,6 @@ vim.keymap.set("n", "<leader>dq", dap.repl.open)
 vim.keymap.set("n", "<leader>dQ", dap.terminate)
 vim.keymap.set("n", "<leader>duo", dapui.toggle)
 vim.keymap.set("n", "<leader>dK", dapui.eval)
+
+local debugHelper = require("baze/debugHelpers");
+vim.keymap.set("n", "<leader>da", debugHelper.attach)

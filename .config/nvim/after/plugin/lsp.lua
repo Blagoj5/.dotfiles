@@ -14,9 +14,9 @@ lsp.ensure_installed({
 	"html",
 	"cssls",
 	"tailwindcss",
-	"sumneko_lua",
+	"lua_ls",
 	"emmet_ls",
-	"sqls",
+	"sqls"
 })
 
 lsp.configure("sqls", {
@@ -48,40 +48,40 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 	["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
 	["<C-Space>"] = cmp.mapping.complete(),
 	["<CR>"] = cmp.mapping.confirm({ select = true }),
-	["<Tab>"] = cmp.mapping(function(fallback)
-		if cmp.visible() then
-			cmp.select_next_item()
-		elseif luasnip.expandable() then
-			luasnip.expand()
-		elseif luasnip.expand_or_jumpable() then
-			luasnip.expand_or_jump()
-		elseif check_backspace() then
-			fallback()
-		else
-			fallback()
-		end
-	end, {
-		"i",
-		"s",
-	}),
-	["<S-Tab>"] = cmp.mapping(function(fallback)
-		if cmp.visible() then
-			cmp.select_prev_item()
-		elseif luasnip.jumpable(-1) then
-			luasnip.jump(-1)
-		else
-			fallback()
-		end
-	end, {
-		"i",
-		"s",
-	}),
+	-- ["<Tab>"] = cmp.mapping(function(fallback)
+	-- 	if cmp.visible() then
+	-- 		cmp.select_next_item()
+	-- 	elseif luasnip.expandable() then
+	-- 		luasnip.expand()
+	-- 	elseif luasnip.expand_or_jumpable() then
+	-- 		luasnip.expand_or_jump()
+	-- 	elseif check_backspace() then
+	-- 		fallback()
+	-- 	else
+	-- 		fallback()
+	-- 	end
+	-- end, {
+	-- 	"i",
+	-- 	"s",
+	-- }),
+	-- ["<S-Tab>"] = cmp.mapping(function(fallback)
+	-- 	if cmp.visible() then
+	-- 		cmp.select_prev_item()
+	-- 	elseif luasnip.jumpable(-1) then
+	-- 		luasnip.jump(-1)
+	-- 	else
+	-- 		fallback()
+	-- 	end
+	-- end, {
+	-- 	"i",
+	-- 	"s",
+	-- }),
 })
 
 -- disable completion with tab
 -- this helps with copilot setup
--- cmp_mappings['<Tab>'] = nil
--- cmp_mappings['<S-Tab>'] = nil
+cmp_mappings["<Tab>"] = nil
+cmp_mappings["<S-Tab>"] = nil
 
 lsp.setup_nvim_cmp({
 	mapping = cmp_mappings,
@@ -133,9 +133,9 @@ lsp.on_attach(function(_client, bufnr)
 		vim.lsp.buf.code_action()
 	end, opts)
 	vim.keymap.set("n", "gr", function()
-		require('telescope.builtin').lsp_references()
+		require("telescope.builtin").lsp_references()
 	end, opts)
-  -- nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+	-- nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 	vim.keymap.set("n", "<leader>rn", function()
 		vim.lsp.buf.rename()
 	end, opts)
@@ -159,24 +159,17 @@ require("typescript").setup({
 	},
 })
 
+require("mason").setup()
+require("mason-null-ls").setup({
+	ensure_installed = {
+		-- "prettier", -- ts/js formatter
+		"stylua", -- lua formatter
+		"eslint_d", -- ts/js linter
+	},
+	automatic_setup = true,
+})
+
 local null_ls = require("null-ls")
-
-local lsp_code_action = function()
-	vim.lsp.buf.code_action()
-end
-
-local lsp_formatting = function(bufnr)
-	return function()
-		vim.lsp.buf.format({
-			filter = function(client)
-				return client.name == "null-ls"
-			end,
-			bufnr = bufnr,
-			timeout_ms = 30000,
-		})
-	end
-end
-
 local diagnostics = null_ls.builtins.diagnostics
 local code_actions = null_ls.builtins.code_actions
 local formatting = null_ls.builtins.formatting
@@ -184,9 +177,9 @@ local formatting = null_ls.builtins.formatting
 local sources = {
 	-- diagnostics.cspell,
 	-- code_actions.cspell,
+	-- formatting.prettier, -- it's coming from main mason
 	code_actions.eslint_d,
-	formatting.eslint_d,
-	formatting.prettier, -- js/ts formatter
+	formatting.eslint_d, -- eslint_d  as formatter
 	formatting.stylua, -- lua formatter
 	diagnostics.eslint_d.with({ -- js/ts linter
 		-- only enable eslint if root has .eslintrc.js (not in youtube nvim video)
@@ -198,31 +191,6 @@ local sources = {
 
 null_ls.setup({
 	sources = sources,
-	on_attach = function(client, bufnr)
-		local bufopts = {
-			noremap = true,
-			silent = true,
-			buffer = bufnr,
-		}
-		if client.supports_method("textDocument/formatting") then
-			vim.keymap.set("n", "<space>f", lsp_formatting(bufnr), bufopts)
-		end
-
-		if client.supports_method("textDocument/codeAction") then
-			vim.keymap.set("n", "<space>la", lsp_code_action, bufopts)
-		end
-	end,
 })
 
-local mason_null_ls = require("mason-null-ls")
-
-mason_null_ls.setup({
-	-- list of formatters & linters for mason to install
-	ensure_installed = {
-		"prettier", -- ts/js formatter
-		"stylua", -- lua formatter
-		"eslint_d", -- ts/js linter
-	},
-	-- auto-install configured formatters & linters (with null-ls)
-	automatic_installation = true,
-})
+require("mason-null-ls").setup_handlers() -- If `automatic_setup` is true.
