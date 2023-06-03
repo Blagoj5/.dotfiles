@@ -16,7 +16,7 @@ lsp.ensure_installed({
 	"tailwindcss",
 	"lua_ls",
 	"emmet_ls",
-	"sqls"
+	"sqls",
 })
 
 lsp.configure("sqls", {
@@ -25,7 +25,7 @@ lsp.configure("sqls", {
 			connections = {
 				{
 					driver = "mysql",
-					dataSourceName = "root:admin@tcp(127.0.0.1:3306)/cfdb_79fee615_c1fb_11eb_9414_0ad79635d98a",
+					dataSourceName = "",
 				},
 				-- {
 				-- 	driver = "postgresql",
@@ -181,6 +181,7 @@ local sources = {
 	code_actions.eslint_d,
 	formatting.eslint_d, -- eslint_d  as formatter
 	formatting.stylua, -- lua formatter
+	formatting.yamlfmt, -- lua formatter
 	diagnostics.eslint_d.with({ -- js/ts linter
 		-- only enable eslint if root has .eslintrc.js (not in youtube nvim video)
 		condition = function(utils)
@@ -192,5 +193,3 @@ local sources = {
 null_ls.setup({
 	sources = sources,
 })
-
-require("mason-null-ls").setup_handlers() -- If `automatic_setup` is true.

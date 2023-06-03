@@ -1,76 +1,74 @@
-echo "Installing Nvim"
-nvim=`command -v nvim`
-if [ -z "$nvim" ]; then
-  curl -o ./nvim-linux64.deb -JLO https://github.com/neovim/neovim/releases/download/v0.8.1/nvim-linux64.deb
-  sudo apt install ./nvim-linux64.deb
-  rm ./nvim-linux64.deb
-fi
-
-
-echo "Installing Packer"
-packer=`command -v packer`
-if [ -z "$packer" ]; then 
-  curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-  sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-  sudo apt-get update && sudo apt-get install packer
-fi
-
-echo "Installing Rigrep"
-packer=`command -v rigrep`
-if [ -z "$packer" ]; then 
-  sudo apt-get install ripgrep
-fi
-
-echo "Installing Clang-12"
-clang=`command -v clang-12`
-if [ -z "$clang" ]; then 
-  sudo apt install clang-12 --install-suggests
-fi
-
-echo "Installing LSP servers"
-npm install -g typescript typescript-language-server eslint_d cspell tree-sitter-cli
-
-# TODO: adress this
-luaServer=`command -v lua-language-server`
-if [ -z "$luaServer" ]; then 
-  ninja=`command -v ninja`
-  if [ -z "$ninja" ]; then 
-    sudo wget -qO /usr/local/bin/ninja.gz https://github.com/ninja-build/ninja/releases/latest/download/ninja-linux.zip
-    sudo gunzip /usr/local/bin/ninja.gz
-    sudo chmod a+x /usr/local/bin/ninja
-  fi
-  mkdir -p ~/.config/lsp
-  cd ~/.config/lsp
-  git clone --depth=1 https://github.com/sumneko/lua-language-server
-  cd lua-language-server
-  git submodule update --depth 1 --init --recursive
-  cd 3rd/luamake
-  ./compile/install.sh
-  cd ../..
-  ./3rd/luamake/luamake rebuild
-  echo 'export PATH="${HOME}/.config/lsp/lua-language-server/bin:${PATH}"' >> ~/.bashrc
-  echo 'export PATH="${HOME}/.config/lsp/lua-language-server/bin:${PATH}"' >> ~/.zsh_profile
-  source ~/.bashrc
-  source ~/.zshrc
-fi
-
-echo "Moving nvim to root"
-if [ -d "$HOME/.config/nvim" ]; then 
-  echo -n "~/.config/nvim already exists, overwrite? (y/n)"
-  read CONFIRM
-  if [ "$CONFIRM" = "y" ]; then
-    echo "Moved new nvim config"
-     ln -sf $PWD/.config/nvim ~/.config/nvim
-    exit 1
-  elif [ "$CONFIRM" = "n" ]; then
-    echo "Exiting installation"
-  fi
-else 
-  ln -sf $PWD/.config/nvim ~/.config/nvim
-fi
-
-# echo "Moving fonts to ~/.local/share/fonts"
-# if [ ! -d ~/.local/share/fonts ]; then 
-#   mkdir -p ~/.local/share/fonts
-# fi
-# cp -r ./.local/share/fonts/* ~/.local/share/fonts/
+- name: Bootstrap development environment
+  hosts: localhost
+  roles:
+    - markosamuli.nvm
+  tasks:
+    - name: Add apt key
+      ansible.builtin.apt_key:
+        url: https://apt.releases.hashicorp.com/gpg
+        state: present
+    - name: Add apt repo num#1
+      become: yes
+      ansible.builtin.apt_repository:
+        repo: "deb  https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+    - name: Add apt repo num#2
+      become: yes
+      ansible.builtin.apt_repository:
+        repo: "ppa:aslatter/ppa"
+    - name: Install packages with apt
+      ansible.builtin.apt:
+        update_cache: true
+        name:
+          - git
+          - i3
+          - tmux
+          - alacritty
+          - curl
+          - neovim
+          - python3-pip
+          - python3-neovim
+          - packer
+          - clang-12
+          - zsh
+        state: present
+    - name: Install rigrep
+      ansible.builtin.apt:
+        deb: https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
+    - name: Setup zsh
+      shell: |
+        chsh -s $(which zsh)
+        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      ignore_errors: true
+    - name: Download fzf
+      ansible.builtin.git:
+        repo: https://github.com/junegunn/fzf.git
+        dest: ~/.fzf
+        depth: 1
+    - name: Install fzf
+      ansible.builtin.shell: |
+        yes | ~/.fzf/install
+        source ~/.zshrc
+      args:
+        executable: /usr/bin/zsh
+      become: yes
+    - name: Install nvm
+      ansible.builtin.shell: >
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | sh
+      args:
+        creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+      become: true
+    - name: Install node
+      ansible.builtin.shell: |
+        /bin/bash -c "source ~/.nvm/nvm.sh && nvm install node"
+        creates=/home/{{ ansible_user_id }}/.nvm/alias
+    - name: Install linters and formatters with npm
+      loop:
+        - eslint_d
+        - typescript
+        - cspell
+        - typescript-language-server
+        - tree-sitter-cli
+      community.general.npm:
+        name: "{{ item }}"
+        global: true
+        state: present

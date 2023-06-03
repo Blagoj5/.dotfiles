@@ -21,24 +21,41 @@ dap.adapters.node2 = {
 }
 
 dap.configurations.javascript = {
-  {
-    name = 'Launch',
-    type = 'node2',
-    request = 'launch',
-    program = '${file}',
-    cwd = vim.fn.getcwd(),
-    sourceMaps = true,
-    protocol = 'inspector',
-    console = 'integratedTerminal',
-  },
+	{
+		name = "Launch",
+		type = "node2",
+		request = "launch",
+		program = "${file}",
+		cwd = vim.fn.getcwd(),
+		sourceMaps = true,
+		protocol = "inspector",
+		console = "integratedTerminal",
+	},
 	-- Activated via <leader>da (using attach function from debugHelpers)
-  -- {
-  --   -- For this to work you need to make sure the node process is started with the `--inspect` flag.
-  --   name = 'Attach to process',
-  --   type = 'node2',
-  --   request = 'attach',
-  --   processId = require'dap.utils'.pick_process,
-  -- },
+	-- {
+	--   -- For this to work you need to make sure the node process is started with the `--inspect` flag.
+	--   name = 'Attach to process',
+	--   type = 'node2',
+	--   request = 'attach',
+	--   processId = require'dap.utils'.pick_process,
+	-- },
+}
+
+-- require("dap.ext.vscode").load_launchjs()
+-- Define a function to start the debugging session using a configuration name
+
+dap.configurations.typescriptreact = {
+	{
+		-- For this to work you need to make sure the node process is started with the `--inspect` flag.
+		name = "Attach to process",
+		processId = require("dap.utils").pick_process,
+		type = "node2",
+		request = "attach",
+		cwd = vim.fn.getcwd(),
+		sourceMaps = true,
+		protocol = "inspector",
+		skipFiles = { "<node_internals>/**/*.js" },
+	},
 }
 
 -- UI FOR DAP
@@ -133,7 +150,6 @@ dap.listeners.before.event_exited["dapui_config"] = function()
 	dapui.close()
 end
 
-
 require("nvim-dap-virtual-text").setup()
 
 vim.keymap.set("n", "<leader>tn", "<cmd>TestNearest -strategy=neovim<CR>")
@@ -158,5 +174,5 @@ vim.keymap.set("n", "<leader>dQ", dap.terminate)
 vim.keymap.set("n", "<leader>duo", dapui.toggle)
 vim.keymap.set("n", "<leader>dK", dapui.eval)
 
-local debugHelper = require("baze/debugHelpers");
+local debugHelper = require("baze/debugHelpers")
 vim.keymap.set("n", "<leader>da", debugHelper.attach)
