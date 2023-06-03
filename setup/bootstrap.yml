@@ -1,0 +1,155 @@
+- name: Bootstrap development environment
+  hosts: localhost
+  tasks:
+    - name: Add apt key
+      ansible.builtin.apt_key:
+        url: https://apt.releases.hashicorp.com/gpg
+        state: present
+    - name: Add apt repo num#1
+      become: yes
+      ansible.builtin.apt_repository:
+        repo: "deb  https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
+    - name: Add apt repo num#2
+      become: yes
+      ansible.builtin.apt_repository:
+        repo: "ppa:aslatter/ppa"
+    - name: Install packages with apt
+      ansible.builtin.apt:
+        update_cache: true
+        name:
+          - git
+          - i3
+          - tmux
+          - alacritty
+          - curl
+          - neovim
+          - python3-pip
+          - python3-neovim
+          - packer
+          - clang-12
+          - zsh
+        state: present
+    - name: Install rigrep
+      ansible.builtin.apt:
+        deb: https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
+    - name: Setup zsh
+      shell: |
+        chsh -s $(which zsh)
+        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      args:
+        creates: "{{ ansible_env.HOME }}/.oh-my-zsh"
+    - name: Download fzf
+      ansible.builtin.git:
+        repo: https://github.com/junegunn/fzf.git
+        dest: ~/.fzf
+        depth: 1
+    - name: Install fzf
+      ansible.builtin.shell: |
+        yes | ~/.fzf/install
+      args:
+        executable: /usr/bin/zsh
+      ignore_errors: true
+      become: yes
+    - name: Install nvm
+      ansible.builtin.shell: |
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+        echo  "export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"" >> ~/.bashrc
+        echo "[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm" >> ~/.bashrc
+        echo "[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion"
+      args:
+        creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+        executable: /usr/bin/zsh
+    - name: Install node
+      ansible.builtin.shell: |
+        source ~/.bashrc
+        source ~/.zshrc
+        nvm install node
+      args:
+        executable: /usr/bin/zsh
+    - name: Install linters and formatters with npm
+      loop:
+        - eslint_d
+        - typescript
+        - cspell
+        - typescript-language-server
+        - tree-sitter-cli
+      ansible.builtin.shell: |
+        source ~/.bashrc
+        source ~/.zshrc
+        npm install -g "{{ item }}"
+      args:
+        executable: /usr/bin/zsh
+- name: My dotfiles
+  hosts: localhost
+  vars_files:
+    - secrets.yml
+  vars:
+    dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+    dest_key_public: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub"
+  tasks:
+    - name: Install git and stow
+      ansible.builtin.apt:
+        name:
+          - git
+          - stow
+        state: present
+      tags:
+        - dotfiles
+    - name: Ensure .ssh directory exists.
+      file:
+        dest: "{{ dest_key | dirname }}"
+        mode: '0700'
+        state: directory
+      tags:
+        - dotfiles
+    - name: Install private ssh key
+      copy:
+        content: "{{ private_ssl_key }}"
+        dest: "{{ dest_key }}"
+        mode: '0600'
+      tags:
+        - dotfiles
+    - name: Install public ssh key
+      copy:
+        content: "{{ public_ssl_key }}"
+        dest: "{{ dest_key_public }}"
+        mode: '0600'
+      tags:
+        - dotfiles
+    - name: Set authorized keys
+      authorized_key:
+        user: "{{ lookup('env', 'USER') }}"
+        key: "{{ lookup('file', dest_key_public) }}"
+        state: present
+      tags:
+        - dotfiles
+    - name: Clone dotfiles repo
+      ansible.builtin.git:
+        repo: "git@github.com:Blagoj5/.dotfiles.git"
+        dest: "{{ lookup('env', 'HOME') }}/.dotfiles"
+        recursive: true
+        accept_hostkey: true
+      tags:
+        - dotfiles
+    - name: Stow config
+      ansible.builtin.shell: |
+        cd {{ ansible_env.HOME }}/.dotfiles
+        stow -D nvim
+        stow --verbose=2 nvim
+        stow -D alacitty
+        stow --verbose=2 alacritty
+        stow -D personal
+        stow --verbose=2 personal
+        stow -D zsh
+        stow --verbose=2 zsh
+        stow -D local
+        stow --verbose=2 local
+        stow -D i3
+        stow --verbose=2 i3
+        stow -D tmux
+        stow --verbose=2 tmux
+      tags:
+        - dotfiles
+
+# add stowing
+# ansible-playbook --ask-vault-password -t dotfiles bootstrap.yml
