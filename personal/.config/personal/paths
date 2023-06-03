@@ -8,6 +8,7 @@ addToPath /usr/lib/llvm-8/bin
 addToPath $HOME/personal/uhh/build
 addToPath $HOME/.cargo/bin
 addToPath $HOME/.rustup
+addToPath /opt/nvim-linux64/bin
 
 # ccache
 addToPathFront /usr/lib/ccache

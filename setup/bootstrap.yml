@@ -22,13 +22,35 @@
           - tmux
           - alacritty
           - curl
-          - neovim
           - python3-pip
           - python3-neovim
           - packer
           - clang-12
           - zsh
+          - lua5.4
         state: present
+    - name: Download Neovim archive
+      get_url:
+        url: "https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz"
+        dest: "/tmp/nvim-linux64.tar.gz"
+      tags:
+        - nvim
+    - name: Extract Neovim archive
+      unarchive:
+        src: "/tmp/nvim-linux64.tar.gz"
+        dest: "/opt/"
+        remote_src: yes
+        creates: "/opt/nvim-linux64"
+      tags:
+        - nvim
+    - name: Add 'nvim' to PATH
+      ansible.builtin.lineinfile:
+        dest: "{{ lookup('env', 'HOME') }}/.bashrc"
+        line: 'export PATH="/opt/nvim-linux64/bin:$PATH"'
+        state: present
+        insertafter: EOF
+      tags:
+        - nvim
     - name: Install rigrep
       ansible.builtin.apt:
         deb: https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
@@ -53,15 +75,11 @@
     - name: Install nvm
       ansible.builtin.shell: |
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-        echo  "export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"" >> ~/.bashrc
-        echo "[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm" >> ~/.bashrc
-        echo "[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion"
       args:
         creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
         executable: /usr/bin/zsh
     - name: Install node
       ansible.builtin.shell: |
-        source ~/.bashrc
         source ~/.zshrc
         nvm install node
       args:
@@ -74,7 +92,6 @@
         - typescript-language-server
         - tree-sitter-cli
       ansible.builtin.shell: |
-        source ~/.bashrc
         source ~/.zshrc
         npm install -g "{{ item }}"
       args:
@@ -140,14 +157,15 @@
         stow --verbose=2 alacritty
         stow -D personal
         stow --verbose=2 personal
-        stow -D zsh
-        stow --verbose=2 zsh
         stow -D local
         stow --verbose=2 local
         stow -D i3
         stow --verbose=2 i3
         stow -D tmux
         stow --verbose=2 tmux
+        rm ../.zshrc
+        stow -D zsh
+        stow --verbose=2 zsh
       tags:
         - dotfiles
 
