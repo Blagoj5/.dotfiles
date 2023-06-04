@@ -68,11 +68,6 @@
         repo: https://github.com/junegunn/fzf.git
         dest: ~/.fzf
         depth: 1
-    - name: Clone packer.nvim repository
-      ansible.builtin.git:
-        repo: https://github.com/wbthomason/packer.nvim
-        dest: ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-        depth: 1
     - name: Install fzf
       ansible.builtin.shell: |
         yes | ~/.fzf/install
@@ -164,6 +159,13 @@
       ansible.builtin.git:
         repo: "https://github.com/github/copilot.vim.git"
         dest: "{{ lookup('env', 'HOME') }}/.config/nvim/pack/github/start/copilot.vim"
+      tags:
+        - dotfiles
+    - name: Clone packer.nvim repository
+      ansible.builtin.git:
+        repo: https://github.com/wbthomason/packer.nvim
+        dest: ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+        depth: 1
       tags:
         - dotfiles
     - name: Stow config
