@@ -28,18 +28,21 @@
           - zsh
           - lua5.4
         state: present
+      become: yes
     - name: Download Neovim archive
       get_url:
         url: "https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz"
         dest: "/tmp/nvim-linux64.tar.gz"
       tags:
         - nvim
+      become: yes
     - name: Extract Neovim archive
       unarchive:
         src: "/tmp/nvim-linux64.tar.gz"
         dest: "/opt/"
         remote_src: yes
         creates: "/opt/nvim-linux64"
+      become: yes
       tags:
         - nvim
     - name: Add 'nvim' to PATH
@@ -59,6 +62,7 @@
         sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
       args:
         creates: "{{ ansible_env.HOME }}/.oh-my-zsh"
+      become: yes
     - name: Download fzf
       ansible.builtin.git:
         repo: https://github.com/junegunn/fzf.git
@@ -90,6 +94,7 @@
         executable: /usr/bin/zsh
       ignore_errors: true
     - name: Install linters and formatters with npm
+      become: yes
       loop:
         - eslint_d
         - typescript
