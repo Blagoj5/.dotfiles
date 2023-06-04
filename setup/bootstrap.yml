@@ -176,5 +176,5 @@
       tags:
         - dotfiles
 
-# add stowing
+# missing become true in few places
 # ansible-playbook --ask-vault-password -t dotfiles bootstrap.yml
