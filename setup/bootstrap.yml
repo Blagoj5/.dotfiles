@@ -160,6 +160,12 @@
         accept_hostkey: true
       tags:
         - dotfiles
+    - name: Setup copilot
+      ansible.builtin.git:
+        repo: "https://github.com/github/copilot.vim.git"
+        dest: "{{ lookup('env', 'HOME') }}/.config/nvim/pack/github/start/copilot.vim"
+      tags:
+        - dotfiles
     - name: Stow config
       ansible.builtin.shell: |
         cd {{ ansible_env.HOME }}/.dotfiles

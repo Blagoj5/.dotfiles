@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker run -v ../setup:/temp/ansiblee -it test /bin/bash
+docker run -v $HOME/.dotfiles/setup:/temp/ansiblee -it test /bin/bash
