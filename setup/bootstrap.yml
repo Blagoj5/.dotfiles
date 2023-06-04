@@ -118,6 +118,7 @@
         state: present
       tags:
         - dotfiles
+      become: true
     - name: Ensure .ssh directory exists.
       file:
         dest: "{{ dest_key | dirname }}"
