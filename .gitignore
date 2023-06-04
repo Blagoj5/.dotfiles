@@ -43,3 +43,4 @@ luac.out
 packer_compiled.lua
 .config/nvim/plugin/packer_compiled.lua
 pack/*
+nvim/.config/nvim/pack/
