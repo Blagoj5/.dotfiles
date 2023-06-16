@@ -256,7 +256,4 @@ exec_always picom
 # exec_always --no-startup-id "setxkbmap -option caps:escape"
 exec_always --no-startup-id "setxkbmap -layout us,mk -option 'grp:lctrl_lwin_toggle'"
 
-# Bind Caps_lock to escape, disable caps lock switch, set caps_lock as escape
-# exec_always --no-startup-id xmodmap -e "clear lock"; sleep 1; xmodmap -e "keysym Caps_Lock = Escape"
-
 bindsym $mod+m move workspace to output left

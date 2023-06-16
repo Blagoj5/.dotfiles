@@ -6,8 +6,8 @@ source $PERSONAL/env
 for i in `find -L $PERSONAL`; do
     source $i
 done
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-source /usr/share/doc/fzf/examples/completion.zsh
+# source /usr/share/doc/fzf/examples/key-bindings.zsh
+# source /usr/share/doc/fzf/examples/completion.zsh
 
 export NRDP="$HOME/work/nrdp"
 export NRDP_BUILDS="$HOME/work/builds"
@@ -87,5 +87,5 @@ eslintify() {
     npx eslint
 }
 
-xmodmap -e "clear lock" #disable caps lock switch
-xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
+# xmodmap -e "clear lock" #disable caps lock switch
+# xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape

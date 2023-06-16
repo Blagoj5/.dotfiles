@@ -2,7 +2,7 @@
 
 # Super cool keyboard stuffs.
 # Required for x applications
-setxkbmap -option caps:ctrl_modifier
+# setxkbmap -option caps:ctrl_modifier
 
 export STOW_FOLDERS="bin,nvim,tmux,uwuntu,netflix,personal,i3,zsh,xkb"
 
