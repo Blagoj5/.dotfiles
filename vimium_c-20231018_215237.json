@@ -1,0 +1,24 @@
+{
+	"name": "Vimium C",
+	"@time": "10/18/2023, 9:52:37 PM",
+	"time": 1697658757452,
+	"environment": {
+		"extension": "1.99.994",
+		"platform": "linux",
+		"chromium": 104
+	},
+	"allBrowserUrls": true,
+	"keyLayout": 2,
+	"keyMappings": [
+		"#!no-check",
+		"map W moveTabToNewWindow",
+		"map L nextTab",
+		"map H previousTab",
+		"map <c-o> goBack",
+		"map <c-i> goForward",
+		"map gv LinkHints.activateSelect",
+		""
+	],
+	"smoothScroll": false,
+	"vimSync": true
+}
