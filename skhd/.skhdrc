@@ -1,0 +1,21 @@
+# prevent skhd from monitoring events for specific applications.
+#
+# .blacklist [
+#    "kitty"
+#    "terminal"
+#    "qutebrowser"
+# ]
+
+# keybinds
+cmd - 0x24 : open -na "Alacritty"
+cmd - 1 : open -a "Alacritty"
+cmd - 2 : osascript ~/open_new_tab.scpt "http://localhost"
+cmd - b : open -na "Google Chrome"
+cmd - 3 : osascript ~/open_chrome.scpt "http://localhost" "https://www.notion.so/Scrum-e0c76522bc434b08b7acdd0fd5260719"
+cmd - 4 : open -a "Discord"
+cmd - 5 : open -a "Microsoft Teams classic"
+cmd - 8 : osascript ~/open_new_tab.scpt "https://www.notion.so/Scrum-e0c76522bc434b08b7acdd0fd5260719"
+# rcmd - d will scroll down in vim, only left cmd used for omni search
+lcmd - d : osascript -e 'tell application "System Events" to key code 49 using {command down}'
+
+cmd + shift - 0x2F : osascript -e 'tell application "System Events" to keystroke "q" using {control down, command down}'

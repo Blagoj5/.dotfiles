@@ -1,0 +1,18 @@
+# prevent skhd from monitoring events for specific applications.
+#
+# .blacklist [
+#    "kitty"
+#    "terminal"
+#    "qutebrowser"
+# ]
+
+# open mpv
+alt - 0x24 : open -na "Alacritty"
+alt - 1 : open -a "Alacritty"
+alt - 2 : osascript ~/open_new_tab.scpt "http://localhost:3000"
+alt - b : open -na "Google Chrome"
+# alt - 3 : open -a "Google Chrome"
+alt - 3 : osascript ~/open_chrome.scpt "http://localhost:3000"
+
+# cmd + shift - q : osascript -e 'tell application "System Events" to key code 12 using {command down, option down}'
+# cmd + shift - q : echo "Nothing"

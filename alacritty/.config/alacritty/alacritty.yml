@@ -1,4 +1,3 @@
-alt_send_esc: true
 bell:
   animation: EaseOutExpo
   color: "0xffffff"
@@ -59,7 +58,7 @@ font:
     family: Hack Nerd Font Mono
     style: Bold Italic
   # Point size
-  size: 10.0
+  size: 14.0
 live_config_reload: true
 window:
   decorations: None
@@ -67,3 +66,16 @@ window:
   opacity: 0.95
   startup_mode: Maximized
   title: Baze
+  options_as_alt: true
+key_bindings:
+  - { key: A, mods: Command, chars: "\x01" } # Remap "Cmd-a" to "Ctrl-a"
+  - { key: C, mods: Command, chars: "\x03" } # Remap "Cmd-C" to "Ctrl-C"
+  - { key: D, mods: Command, chars: "\x04" } # Remap "Cmd-D" to "Ctrl-D"
+  - { key: U, mods: Command, chars: "\x15" } # Remap "Cmd-U" to "Ctrl-U"
+  - { key: W, mods: Command, chars: "\x17" } # Remap "Cmd-W" to "Ctrl-W"
+  - { key: Key6, mods: Command, chars: "\x1e" } # Remap "Cmd-6" to "Ctrl-^"
+  - { key: J, mods: Command, chars: "\x0a" } # Remap "Cmd-J" to "Ctrl-J"
+  - { key: K, mods: Command, chars: "\x0b" } # Remap "Cmd-K" to "Ctrl-K"
+  - { key: O, mods: Command, chars: "\x0f" } # Remap "Cmd-O" to "Ctrl-O"
+  - { key: I, mods: Command, chars: "\x09" } # Remap "Cmd-I" to "Ctrl-I"
+
