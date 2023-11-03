@@ -78,4 +78,5 @@ key_bindings:
   - { key: K, mods: Command, chars: "\x0b" } # Remap "Cmd-K" to "Ctrl-K"
   - { key: O, mods: Command, chars: "\x0f" } # Remap "Cmd-O" to "Ctrl-O"
   - { key: I, mods: Command, chars: "\x09" } # Remap "Cmd-I" to "Ctrl-I"
+  - { key: F, mods: Command, chars: "\x06" } # Remap "Cmd-I" to "Ctrl-I"
 
