@@ -50,3 +50,8 @@ READ: https://github.com/jdhao/nvim-config
 ## MAC
 
 ### Must apps in order this to work
+- Rectangular (as a basic window manager)
+- Hammerspoon (to shift the mouse pointer across multiple displays depending on focus)
+- AltTab (similar to Windows alt-tab, but it allows you to use alt instead of cmd and displays all open windows)
+- Skhd (to designate additional keybinds)
+- Spotlight (mapped to alt-d)
