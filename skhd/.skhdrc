@@ -7,15 +7,99 @@
 # ]
 
 # keybinds
-cmd - 0x24 : open -na "Alacritty"
-cmd - 1 : open -a "Alacritty"
-cmd - 2 : osascript ~/open_new_tab.scpt "http://localhost"
-cmd - b : open -na "Google Chrome"
-cmd - 3 : osascript ~/open_chrome.scpt "http://localhost" "https://www.notion.so/Scrum-e0c76522bc434b08b7acdd0fd5260719"
-cmd - 4 : open -a "Discord"
-cmd - 5 : open -a "Microsoft Teams classic"
-cmd - 8 : osascript ~/open_new_tab.scpt "https://www.notion.so/Scrum-e0c76522bc434b08b7acdd0fd5260719"
-# rcmd - d will scroll down in vim, only left cmd used for omni search
-lcmd - d : osascript -e 'tell application "System Events" to key code 49 using {command down}'
+alt - 0x24 : open -na "Alacritty"
+alt - 1 : open -a "Alacritty"
+alt - 2 : osascript ~/open_new_tab.scpt "http://localhost"
+alt - b : open -na "Google Chrome"
+alt - 3 : osascript ~/open_chrome.scpt "http://localhost" "https://www.notion.so/Scrum-e0c76522bc434b08b7acdd0fd5260719"
+alt - 4 : open -a "Discord"
+alt - 5 : open -a "Microsoft Teams classic"
+alt - 8 : osascript ~/open_new_tab.scpt "https://www.notion.so/Scrum-e0c76522bc434b08b7acdd0fd5260719"
+alt - q : osascript -e 'tell application "System Events" to key code 12 using {command down}'
 
-cmd + shift - 0x2F : osascript -e 'tell application "System Events" to keystroke "q" using {control down, command down}'
+# ralt - d will scroll down in vim, only left cmd used for omni search
+# lcmd - d : osascript -e 'tell application "System Events" to key code 49 using {command down}'
+
+# yabai if I ever decide to use it
+# -- Changing Window Focus --
+
+# # change window focus within space
+# alt - j : yabai -m window --focus south
+# alt - k : yabai -m window --focus north
+# alt - h : yabai -m window --focus west
+# alt - l : yabai -m window --focus east
+#
+# #change focus between external displays (left and right)
+# alt - s: yabai -m display --focus west
+# alt - g: yabai -m display --focus east
+#
+# # -- Modifying the Layout --
+#
+# # rotate layout clockwise
+# alt - e : yabai -m space --rotate 270
+#
+# # flip along y-axis
+# shift + alt - y : yabai -m space --mirror y-axis
+#
+# # flip along x-axis
+# shift + alt - x : yabai -m space --mirror x-axis
+#
+# # toggle window float
+# shift + alt - f : yabai -m window --toggle float --grid 4:4:1:1:2:2
+#
+#
+# # -- Modifying Window Size --
+#
+# # maximize a window
+# alt - f : yabai -m window --toggle zoom-fullscreen
+#
+# # balance out tree of windows (resize to occupy same area)
+# shift + alt - e : yabai -m space --balance
+#
+# # resize
+# alt + cmd - h : yabai -m window --resize left:-20:0 ; yabai -m window --resize right:-20:0
+# ctrl + cmd - j : yabai -m window --resize bottom:0:20 ; yabai -m window --resize top:0:20
+# ctrl + cmd - k : yabai -m window --resize top:0:-20 ; yabai -m window --resize bottom:0:-20
+# ctrl + cmd - l : yabai -m window --resize right:20:0 ; yabai -m window --resize left:20:0
+#
+# # -- Moving Windows Around --
+#
+# # close window
+# alt - q : yabai -m window --close
+#
+# # swap windows
+# shift + alt - j : yabai -m window --swap south
+# shift + alt - k : yabai -m window --swap north
+# shift + alt - h : yabai -m window --swap west
+# shift + alt - l : yabai -m window --swap east
+#
+# # move window and split
+# # ctrl + alt - j : yabai -m window --warp south
+# # ctrl + alt - k : yabai -m window --warp north
+# # ctrl + alt - h : yabai -m window --warp west
+# # ctrl + alt - l : yabai -m window --warp east
+#
+# # move window to display left and right
+# alt - m : yabai -m window --display west; yabai -m display --focus west;
+# # shift + alt - g : yabai -m window --display east; yabai -m display --focus east;
+#
+#
+# # move window to prev and next space
+# # shift + alt - p : yabai -m window --space prev;
+# # shift + alt - n : yabai -m window --space next;
+#
+# # move window to space #
+# shift + alt - 1 : yabai -m window --space 1;
+# shift + alt - 2 : yabai -m window --space 2;
+# shift + alt - 3 : yabai -m window --space 3;
+# shift + alt - 4 : yabai -m window --space 4;
+# shift + alt - 5 : yabai -m window --space 5;
+# shift + alt - 6 : yabai -m window --space 6;
+# shift + alt - 7 : yabai -m window --space 7;
+#
+# # -- Starting/Stopping/Restarting Yabai --
+#
+# # stop/start/restart yabai
+# ctrl + alt - q : brew services stop yabai
+# ctrl + alt - s : brew services start yabai
+# ctrl + alt - r : brew services restart yabai
