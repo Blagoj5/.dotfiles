@@ -104,3 +104,9 @@ source ~/.zsh_profile
 alias luamake=/home/mpaulson/personal/lua-language-server/3rd/luamake/luamake
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/blagojpetrovoffice/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/blagojpetrovoffice/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/blagojpetrovoffice/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/blagojpetrovoffice/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
