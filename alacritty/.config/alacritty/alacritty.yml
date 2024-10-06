@@ -63,7 +63,8 @@ live_config_reload: true
 window:
   decorations: None
   dynamic_title: false
-  opacity: 0.95
+  # opacity: 0.95
+  opacity: 1
   startup_mode: Maximized
   title: Baze
   options_as_alt: true
@@ -79,4 +80,5 @@ key_bindings:
   - { key: O, mods: Command, chars: "\x0f" } # Remap "Cmd-O" to "Ctrl-O"
   - { key: I, mods: Command, chars: "\x09" } # Remap "Cmd-I" to "Ctrl-I"
   - { key: F, mods: Command, chars: "\x06" } # Remap "Cmd-I" to "Ctrl-I"
+  - { key: E, mods: Command, chars: "\x05" } # Remap "Cmd-E" to "Ctrl-E"
 
