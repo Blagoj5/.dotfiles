@@ -6,8 +6,9 @@ source $PERSONAL/env
 for i in `find -L $PERSONAL`; do
     source $i
 done
-# source /usr/share/doc/fzf/examples/key-bindings.zsh
-# source /usr/share/doc/fzf/examples/completion.zsh
+
+source /Users/blagojpetrovoffice/.local/usr/share/doc/fzf/examples/key-bindings.zsh
+source /Users/blagojpetrovoffice/.local/usr/share/doc/fzf/examples/completion.zsh
 
 export NRDP="$HOME/work/nrdp"
 export NRDP_BUILDS="$HOME/work/builds"
@@ -88,6 +89,7 @@ eslintify() {
 # xmodmap -e "clear lock" #disable caps lock switch
 # xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
 export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
 export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
@@ -95,3 +97,13 @@ export PATH="/opt/homebrew/opt/jpeg/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/jpeg/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/jpeg/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/jpeg/lib/pkgconfig"
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  autoload -Uz compinit
+  compinit
+fi
+
+alias notes='NVIM_APPNAME=nvim-obsidian nvim ~/vaults/work/Home.md'
+alias notes-p='NVIM_APPNAME=nvim-obsidian nvim ~/vaults/personal'

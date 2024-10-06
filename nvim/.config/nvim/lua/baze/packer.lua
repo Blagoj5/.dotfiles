@@ -11,6 +11,14 @@ return require("packer").startup(function(use)
 	use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", requires = { "nvim-lua/plenary.nvim" } })
 	-- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
+	use({
+		"laytan/tailwind-sorter.nvim",
+		requires = { "nvim-treesitter/nvim-treesitter", "nvim-lua/plenary.nvim" },
+		config = function()
+			require("tailwind-sorter").setup()
+		end,
+		run = "cd formatter && npm ci && npm run build",
+	})
 
 	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
 	use("nvim-treesitter/nvim-treesitter-context")
@@ -67,7 +75,7 @@ return require("packer").startup(function(use)
 	})
 
 	use("folke/zen-mode.nvim")
-	use("github/copilot.vim")
+	-- use("github/copilot.vim")
 
 	use({
 		"folke/trouble.nvim",
@@ -105,9 +113,16 @@ return require("packer").startup(function(use)
 
 	-- debug/tests plugins
 	-- use("David-Kunz/jester")
-	use("mfussenegger/nvim-dap")
-	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-	use("theHamsta/nvim-dap-virtual-text")
+	use({
+		"mfussenegger/nvim-dap",
+		requires = {
+			"leoluz/nvim-dap-go",
+			"rcarriga/nvim-dap-ui",
+			"theHamsta/nvim-dap-virtual-text",
+			"nvim-neotest/nvim-nio",
+			"williamboman/mason.nvim",
+		},
+	})
 	use("nvim-telescope/telescope-dap.nvim")
 	use("vim-test/vim-test")
 	use({
@@ -115,6 +130,23 @@ return require("packer").startup(function(use)
 		config = function()
 			require("debugprint").setup()
 		end,
+	})
+
+	use({
+		"nvim-neotest/neotest",
+		requires = {
+			-- Your test adapters here
+			"fredrikaverpil/neotest-golang", -- Installation
+			"nvim-neotest/neotest-jest",
+			"thenbe/neotest-playwright",
+		},
+	})
+
+	use({ "mxsdev/nvim-dap-vscode-js", requires = { "mfussenegger/nvim-dap" } })
+	use({
+		"microsoft/vscode-js-debug",
+		opt = true,
+		run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
 	})
 
 	-- use({
@@ -131,6 +163,7 @@ return require("packer").startup(function(use)
 			require("glow").setup()
 		end,
 	})
+	use("wittyjudge/gruvbox-material.nvim")
 
 	use({
 		"rose-pine/neovim",
@@ -142,4 +175,24 @@ return require("packer").startup(function(use)
 	use("EdenEast/nightfox.nvim")
 	use("navarasu/onedark.nvim")
 	use("marko-cerovac/material.nvim")
+
+	use({
+		"epwalsh/obsidian.nvim",
+		tag = "*", -- recommended, use latest release instead of latest commit
+		requires = {
+			-- Required.
+			"nvim-lua/plenary.nvim",
+			-- see below for full list of optional dependencies 👇
+		},
+	})
+	-- use("echasnovski/mini.nvim")
+	-- use("echasnovski/mini.icons")
+	use({
+		"MeanderingProgrammer/markdown.nvim",
+		as = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
+		after = { "nvim-treesitter" },
+		-- requires = { "echasnovski/mini.nvim", opt = true }, -- if you use the mini.nvim suite
+		-- requires = { "echasnovski/mini.icons", opt = true }, -- if you use standalone mini plugins
+		requires = { "nvim-tree/nvim-web-devicons", opt = true }, -- if you prefer nvim-web-devicons
+	})
 end)
