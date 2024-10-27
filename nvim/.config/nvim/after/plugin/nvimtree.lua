@@ -44,18 +44,11 @@ nvim_tree.setup({
 		adaptive_size = false,
 		centralize_selection = false,
 		width = "50%",
-		hide_root_folder = false,
 		side = "left",
 		preserve_window_proportions = false,
 		number = true,
 		relativenumber = true,
 		signcolumn = "yes",
-		mappings = {
-			custom_only = false,
-			list = {
-				-- user mappings go here
-			},
-		},
 		float = {
 			enable = false,
 			quit_on_focus_loss = true,

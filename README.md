@@ -1,15 +1,17 @@
 # .dotfiles
 
 ## Required
+
 - Neovim v0.8
 - I3WM
-  - picom (composer)
+  - picom (composer) (Ubuntu 22 and later has it)
   - nitrogen (background)
   - blueman (GUI bluetooth manager)
-  - pavucontrol (GUI for audio), also available shortcuts for handling sound (pactl) 
-  
-Good read: https://www.makeuseof.com/things-to-do-after-installing-i3wm/
-Setup laptop: https://cravencode.com/post/essentials/enable-tap-to-click-in-i3wm/
+  - pavucontrol (GUI for audio)
+  - pactl (CLI for sound; it's shipped out of the box with ubuntu distro)
+
+[Good read for general i3 setup](https://www.makeuseof.com/things-to-do-after-installing-i3wm/)
+[Setting up touchpad and natural scrolling (laptop stuff)](https://cravencode.com/post/essentials/enable-tap-to-click-in-i3wm/)
 
 ## Structure
 
@@ -19,6 +21,7 @@ How it should like on your LINUX:
 │   .tmux.conf
 │   .zshrc
 │   .zsh_profile
+│   .Xmodmap
 └───.config
 │   │   nvim
 │   │   │   *.lua

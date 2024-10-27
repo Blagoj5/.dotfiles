@@ -233,8 +233,10 @@ bindsym F11 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%  # Up
 bindsym F12 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%  # Down
 
 # # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec brightnessctl +5% # increase screen brightness
-bindsym XF86MonBrightnessDown exec brightnessctl 5%- # decrease screen brightness
+bindsym XF86MonBrightnessUp exec brightnessctl set +5% # increase screen brightness
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%- # decrease screen brightness
+# bindsym F5 exec brightnessctl set 5%- # increase screen brightness
+# bindsym F6 exec brightnessctl set +5% # decrease screen brightness
 
 # Bluetooth
 bindsym $mod+b exec --no-startup-id blueman-manager
@@ -250,10 +252,8 @@ exec_always --no-startup-id nitrogen --restore
 
 # compositer
 exec_always picom
-# exec_always --no-startup-id picom -f # adds animation
 
 # Add Macedonian Keyboard Layout
-# exec_always --no-startup-id "setxkbmap -option caps:escape"
 exec_always --no-startup-id "setxkbmap -layout us,mk -option 'grp:lctrl_lwin_toggle'"
 
-bindsym $mod+m move workspace to output left
+bindsym $mod+m move workspace to output next

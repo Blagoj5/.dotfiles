@@ -27,6 +27,17 @@
           - clang-12
           - zsh
           - lua5.4
+          - nitrogren
+          - blueman
+          - bluez
+          - bluez-obexd
+          - pavucontrol
+          - gimp
+          - fzf
+          - htop
+          - xrandr
+          - arandr
+          - brightnessctl
         state: present
       become: yes
     - name: Download Neovim archive
@@ -62,18 +73,6 @@
         sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
       args:
         creates: "{{ ansible_env.HOME }}/.oh-my-zsh"
-      become: yes
-    - name: Download fzf
-      ansible.builtin.git:
-        repo: https://github.com/junegunn/fzf.git
-        dest: ~/.fzf
-        depth: 1
-    - name: Install fzf
-      ansible.builtin.shell: |
-        yes | ~/.fzf/install
-      args:
-        executable: /usr/bin/zsh
-      ignore_errors: true
       become: yes
     - name: Install nvm
       ansible.builtin.shell: |
@@ -173,6 +172,8 @@
         cd {{ ansible_env.HOME }}/.dotfiles
         stow -D nvim
         stow --verbose=2 nvim
+        stow -D nvim-obsidian
+        stow --verbose=2 nvim-obsidian
         stow -D alacitty
         stow --verbose=2 alacritty
         stow -D personal
