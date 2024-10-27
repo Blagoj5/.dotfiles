@@ -2,19 +2,27 @@
   hosts: localhost
   tasks:
     - name: Add apt key
+      tags:
+        - setup
       ansible.builtin.apt_key:
         url: https://apt.releases.hashicorp.com/gpg
         state: present
       become: true
     - name: Add apt repo num#1
+      tags:
+        - setup
       become: yes
       ansible.builtin.apt_repository:
         repo: "deb  https://apt.releases.hashicorp.com {{ ansible_distribution_release }} main"
     - name: Add apt repo num#2
+      tags:
+        - setup
       become: yes
       ansible.builtin.apt_repository:
         repo: "ppa:aslatter/ppa"
     - name: Install packages with apt
+      tags:
+        - setup
       ansible.builtin.apt:
         update_cache: true
         name:
@@ -24,10 +32,9 @@
           - alacritty
           - curl
           - python3-pip
-          - clang-12
           - zsh
           - lua5.4
-          - nitrogren
+          - nitrogen
           - blueman
           - bluez
           - bluez-obexd
@@ -35,12 +42,13 @@
           - gimp
           - fzf
           - htop
-          - xrandr
           - arandr
           - brightnessctl
         state: present
       become: yes
     - name: Download Neovim archive
+      tags:
+        - setup
       get_url:
         url: "https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz"
         dest: "/tmp/nvim-linux64.tar.gz"
@@ -48,6 +56,8 @@
         - nvim
       become: yes
     - name: Extract Neovim archive
+      tags:
+        - setup
       unarchive:
         src: "/tmp/nvim-linux64.tar.gz"
         dest: "/opt/"
@@ -55,6 +65,7 @@
         creates: "/opt/nvim-linux64"
       become: yes
       tags:
+        - setup
         - nvim
     - name: Add 'nvim' to PATH
       ansible.builtin.lineinfile:
@@ -63,11 +74,16 @@
         state: present
         insertafter: EOF
       tags:
+        - setup
         - nvim
     - name: Install rigrep
+      tags:
+        - setup
       ansible.builtin.apt:
         deb: https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
     - name: Setup zsh
+      tags:
+        - setup
       shell: |
         chsh -s $(which zsh)
         sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -75,12 +91,16 @@
         creates: "{{ ansible_env.HOME }}/.oh-my-zsh"
       become: yes
     - name: Install nvm
+      tags:
+        - setup
       ansible.builtin.shell: |
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
       args:
         creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
         executable: /usr/bin/zsh
     - name: Install node
+      tags:
+        - setup
       ansible.builtin.shell: |
         source ~/.zshrc
         nvm install node
@@ -88,7 +108,8 @@
         executable: /usr/bin/zsh
       ignore_errors: true
     - name: Install linters and formatters with npm
-      become: yes
+      tags:
+        - setup
       loop:
         - eslint_d
         - typescript
@@ -101,6 +122,7 @@
       args:
         executable: /usr/bin/zsh
       ignore_errors: true
+
 - name: My dotfiles
   hosts: localhost
   vars_files:
