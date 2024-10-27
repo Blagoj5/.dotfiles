@@ -1,5 +1,11 @@
 # .dotfiles
 
+Run Automatic setup:
+```bash
+ansible-playbook -t dotfiles setup/bootstrap.yml
+ansible-playbook -t setup setup/bootstrap.yml
+```
+
 ## Required
 
 - Neovim v0.8
