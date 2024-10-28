@@ -1,0 +1,73 @@
+return {
+  {
+    "nvim-tree/nvim-tree.lua",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons", -- optional, for file icons
+    },
+    config = function()
+      local nvim_tree = require("nvim-tree")
+
+      vim.g.root_folder_modifier = ":t"
+      vim.g.git_hl = 1
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+
+      -- change color for arrows in tree to light blue
+      -- vim.cmd([[ highlight NvimTreeIndentMarker guifg=#3FC5FF ]])
+
+      nvim_tree.setup({
+        actions = {
+          open_file = {
+            quit_on_open = true,
+            window_picker = {
+              enable = false,
+            },
+          },
+          change_dir = {
+            enable = false,
+            global = false,
+            restrict_above_cwd = true,
+          }
+        },
+        update_focused_file = {
+          enable = true,
+          update_root = false,
+          ignore_list = {},
+        },
+        renderer = {
+          icons = {
+            glyphs = {
+              folder = {
+                arrow_closed = "", -- arrow when folder is closed
+                arrow_open = "", -- arrow when folder is open
+              },
+            },
+          },
+        },
+        view = {
+          adaptive_size = false,
+          centralize_selection = false,
+          width = "50%",
+          side = "left",
+          preserve_window_proportions = false,
+          number = true,
+          relativenumber = true,
+          signcolumn = "yes",
+          float = {
+            enable = false,
+            quit_on_focus_loss = true,
+            open_win_config = {
+              relative = "editor",
+              border = "rounded",
+              width = 30,
+              height = 30,
+              row = 1,
+              col = 1,
+            },
+          },
+        },
+      })
+      vim.keymap.set("n", "<leader>pv", "<cmd>NvimTreeToggle<CR>")
+    end
+  }
+}

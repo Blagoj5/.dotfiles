@@ -1,1 +1,2 @@
-require("baze")
+require("config.settings")
+require("config.lazy")
