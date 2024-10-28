@@ -37,7 +37,6 @@ require("luasnip.loaders.from_snipmate").load({paths = "~/.config/nvim/snippets"
 require("neodev").setup({})
 
 local cmp = require("cmp")
-local cmp_action = require("lsp-zero").cmp_action()
 
 local has_words_before = function()
 	unpack = unpack or table.unpack
