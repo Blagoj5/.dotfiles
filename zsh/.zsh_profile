@@ -89,7 +89,7 @@ eslintify() {
 
 # xmodmap -e "clear lock" #disable caps lock switch
 # xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
-xmodmap ~/.Xmodmap
+# xmodmap ~/.Xmodmap # taken care of by I3WM config
 
 alias notes='NVIM_APPNAME=nvim-obsidian nvim ~/vaults/work/Home.md'
 alias notes-p='NVIM_APPNAME=nvim-obsidian nvim ~/vaults/personal'
